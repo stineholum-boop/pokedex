@@ -611,7 +611,8 @@ JSON format:
         })
       });
 
-const data = await response.json();
+const text = await response.text();
+const data = JSON.parse(text);
 if (data.error) throw new Error(data.error.message || "API error");
 const raw = data.content?.map(c => c.text || "").join("") || "";
 const clean = raw.replace(/```json|```/g, "").trim();

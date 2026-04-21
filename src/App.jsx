@@ -529,9 +529,16 @@ export default function PokedexApp() {
         video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } }
       });
       streamRef.current = stream;
-      if (videoRef.current) videoRef.current.srcObject = stream;
       setMode("camera");
       setStatusMsg("CAMERA ACTIVE - POINT AT POKEMON");
+      setTimeout(() => {
+  if (videoRef.current) {
+    videoRef.current.srcObject = stream;
+    videoRef.current.setAttribute("playsinline", "true");
+    videoRef.current.setAttribute("muted", "true");
+    videoRef.current.play().catch(() => {});
+  }
+      }, 100);
     } catch {
       setErrorMsg("CAMERA ACCESS DENIED.\nPLEASE ALLOW CAMERA PERMISSION.");
       setMode("error");

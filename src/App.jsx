@@ -573,9 +573,9 @@ export default function PokedexApp() {
     setStatusMsg("SCANNING POKEMON...");
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/analyze", {
         method: "POST",
-        headers: { "Content-Type": "application/json", "x-api-key": "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", "anthropic-version": "2023-06-01" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: "claude-sonnet-4-20250514",
           max_tokens: 1000,

@@ -626,7 +626,7 @@ JSON format:
         setStatusMsg(`${parsed.name?.toUpperCase()} DATA LOADED!`);
       }
     } catch {
-      setErrorMsg("ANALYSIS ERROR.\nPLEASE TRY AGAIN.");
+      setErrorMsg("ANALYSIS ERROR.\n" + err.message);
       setMode("error");
       setStatusMsg("ERROR");
     }

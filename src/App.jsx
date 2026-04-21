@@ -611,10 +611,12 @@ JSON format:
         })
       });
 
-      const data = await response.json();
-      const raw = data.content?.map(c => c.text || "").join("") || "";
-      const clean = raw.replace(/```json|```/g, "").trim();
-      const parsed = JSON.parse(clean);
+const data = await response.json();
+if (data.error) throw new Error(data.error.message || "API error");
+const raw = data.content?.map(c => c.text || "").join("") || "";
+const clean = raw.replace(/```json|```/g, "").trim();
+if (!clean) throw new Error("Empty response from AI");
+const parsed = JSON.parse(clean);
 
       if (parsed.error) {
         setErrorMsg(parsed.error.toUpperCase() + ".\nTRY AGAIN WITH A\nPOKEMON IMAGE.");

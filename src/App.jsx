@@ -563,10 +563,10 @@ export default function PokedexApp() {
     if (!videoRef.current) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    canvas.width = videoRef.current.videoWidth || 640;
-    canvas.height = videoRef.current.videoHeight || 480;
+    canvas.width = videoRef.current.videoWidth || 320;
+    canvas.height = videoRef.current.videoHeight || 240;
     ctx.drawImage(videoRef.current, 0, 0);
-    const imageData = canvas.toDataURL("image/jpeg", 0.8).split(",")[1];
+    const imageData = canvas.toDataURL("image/jpeg", 0.3).split(",")[1];
 
     stopCamera();
     setMode("loading");

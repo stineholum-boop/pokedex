@@ -523,6 +523,13 @@ export default function PokedexApp() {
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
 
+  const videoCallbackRef = useCallback((node) => {
+  videoRef.current = node;
+  if (node && streamRef.current) {
+    node.srcObject = streamRef.current;
+    node.play().catch(() => {});
+  }
+}, []);
   const startCamera = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -665,7 +672,7 @@ JSON format:
 
                 {mode === "camera" && (
                   <div className="camera-view">
-                    <video ref={videoRef} autoPlay playsInline muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                    <video ref={videoCallbackRef} autoPlay playsInline muted style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     <div className="camera-overlay">
                       <div className="scan-line" />
                       <div className="corner corner-tl" />
